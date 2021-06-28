@@ -6,3 +6,4 @@ CREATE DATABASE life_tracker;
 \connect life_tracker;
 
 \i life-tracker-schema.sql --executes that schema 
+\i life-tracker-seed.sql
