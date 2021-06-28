@@ -5,6 +5,7 @@ CREATE TABLE users (
     username    TEXT UNIQUE NOT NULL,
     first_name  TEXT NOT NULL,
     last_name   TEXT NOT NULL
+    -- is_admin    BOOLEAN NOT NULL DEFAULT FALSE
 )
 
 CREATE TYPE foodCategories AS ENUM ('Fruit', 'Vegetable', 'Grain', 'Protein Food', 'Dairy', 'Beverage')
