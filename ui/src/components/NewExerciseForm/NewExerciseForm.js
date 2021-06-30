@@ -2,9 +2,9 @@ import { useState } from "react"
 // import axios from "axios"
 import apiClient from "../services/apiClient"
 import NotAllowed from "../NotAllowed/NotAllowed"
-import "./NewPostForm.css"
+import "./NewExerciseForm.css"
 
-export default function NewPostForm({ user, addExercise }) {
+export default function NewExerciseForm({ user, addExercise }) {
   const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors] = useState(null)
   const [form, setForm] = useState({
@@ -93,7 +93,7 @@ export default function NewPostForm({ user, addExercise }) {
   }
 
   return (
-    <div className="NewPostForm">
+    <div className="NewExerciseForm">
       <div className="card">
         <h2>Add an exercise</h2>
 

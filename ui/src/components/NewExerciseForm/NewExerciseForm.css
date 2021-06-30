@@ -1,4 +1,4 @@
-.NewPostForm {
+.NewExerciseForm {
   background: var(--pure-white);
   display: flex;
   flex-direction: column;
@@ -10,42 +10,42 @@
   padding: 20px 30px;
   margin-bottom: 40px;
 }
-.NewPostForm .card {
+.NewExerciseForm .card {
   background: var(--pure-white);
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
 }
-.NewPostForm .error {
+.NewExerciseForm .error {
   color: var(--bright-red);
   margin: 10px 0;
 }
-.NewPostForm .card .form {
+.NewExerciseForm .card .form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
   padding-bottom: 10px;
 }
-.NewPostForm .card .form .input-field {
+.NewExerciseForm .card .form .input-field {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
   margin: 8px 0;
 }
-.NewPostForm .card .form .input-field label {
+.NewExerciseForm .card .form .input-field label {
   margin-bottom: 5px;
 }
-.NewPostForm .card .form .input-field input {
+.NewExerciseForm .card .form .input-field input {
   height: 60px;
   padding: 0 15px;
   font-size: 16px;
   border: solid 1px var(--border-color);
   width: 100%;
 }
-.NewPostForm .card .form .btn {
+.NewExerciseForm .card .form .btn {
   width: 100%;
   height: 70px;
   color: white;

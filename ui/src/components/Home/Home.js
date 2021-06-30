@@ -1,5 +1,5 @@
 import Post from "../Post/Post"
-import NewPostForm from "../NewPostForm/NewPostForm"
+import NewExerciseForm from "../NewExerciseForm/NewExerciseForm"
 import "./Home.css"
 
 export default function Home({ user, isFetching, exercises, addExercise, error }) {
@@ -7,7 +7,7 @@ export default function Home({ user, isFetching, exercises, addExercise, error }
     <div className="Home">
       <h1 className="intro">All Exercises</h1>
 
-      <NewPostForm user={user} addExercise={addExercise} />
+      <NewExerciseForm user={user} addExercise={addExercise} />
 
       <div className="feed">
         {error ? <h2 className="error">{error}</h2> : null}
