@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
+import apiClient from "../services/apiClient"
 import Stars from "../Stars/Stars"
 import StarsInput from "../StarsInput/StarsInput"
 import { formatRating, formatDate } from "../../utils/format"
@@ -8,22 +9,27 @@ import "./PostDetail.css"
 
 const fetchPostById = async ({ postId, setIsFetching, setError, setPost, setCaption }) => {
   setIsFetching(true)
-
-  try {
-    const res = await axios.get(`http://localhost:3001/posts/${postId}`)
-    if (res?.data?.post) {
-      setPost(res.data.post)
-      setCaption(res.data.post.caption)
-    } else {
-      setError("Something went wrong fetching the post.")
-    }
-  } catch (err) {
-    console.log(err)
-    const message = err?.response?.data?.error?.message
-    setError(message ?? String(err))
-  } finally {
-    setIsFetching(false)
+  const { data, error } = await apiClient.fetchPostById(postId)
+  if (error) setError(error)
+  if (data) {
+    setPost(data.post)
   }
+  // try {
+  //   const res = await axios.get(`http://localhost:3001/posts/${postId}`)
+  //   if (res?.data?.post) {
+  //     setPost(res.data.post)
+  //     setCaption(res.data.post.caption)
+  //   } else {
+  //     setError("Something went wrong fetching the post.")
+  //   }
+  // } catch (err) {
+  //   console.log(err)
+  //   const message = err?.response?.data?.error?.message
+  //   setError(message ?? String(err))
+  // } finally {
+  //   setIsFetching(false)
+  // }
+  setIsFetching(false)
 }
 
 export default function PostDetail({ user }) {

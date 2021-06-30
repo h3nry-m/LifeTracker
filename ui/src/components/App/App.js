@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import axios from "axios"
+import apiClient from "../services/apiClient"
 import Navbar from "../Navbar/Navbar"
 import Home from "../Home/Home"
 import Register from "../Register/Register"
@@ -11,38 +11,46 @@ import "./App.css"
 
 export default function App() {
   const [user, setUser] = useState({})
-  const [posts, setPosts] = useState([])
+  const [exercises, setExercises] = useState([])
   const [error, setError] = useState(null)
   const [isFetching, setIsFetching] = useState(false)
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchExercises = async () => {
       setIsFetching(true)
 
-      try {
-        const res = await axios.get("http://localhost:3001/posts")
-        if (res?.data?.posts) {
-          setError(null)
-          setPosts(res.data.posts)
-        }
-      } catch (err) {
-        console.log(err)
-        const message = err?.response?.data?.error?.message
-        setError(message ?? String(err))
-      } finally {
-        setIsFetching(false)
-      }
+        const {data,error} = await apiClient.listExercises()
+        if (data) setExercises(data.exercises)
+        if (error) setError(error)
+
+      setIsFetching(false)
     }
 
-    fetchPosts()
+    fetchExercises()
   }, [])
 
-  const addPost = (newPost) => {
-    setPosts((oldPosts) => [newPost, ...oldPosts])
+  // handles the persistent user token 
+  useEffect(() => {
+    const fetchUser = async() => {
+      const {data,error} = await apiClient.fetchUserFromToken()
+      //everytime refresh page, app makes an api request above
+      if (data) setUser(data.user)
+      if (error) setError(error)
+    }
+    const token = localStorage.getItem("life_tracker_token")
+    if (token) {
+      apiClient.setToken(token)
+      fetchUser()
+    }
+
+  }, [])
+
+  const addExercise = (newPost) => {
+    setExercises((oldPosts) => [newPost, ...oldPosts])
   }
 
   const updatePost = ({ postId, postUpdate }) => {
-    setPosts((oldPosts) => {
+    setExercises((oldPosts) => {
       return oldPosts.map((post) => {
         if (post.id === Number(postId)) {
           return { ...post, ...postUpdate }
@@ -53,18 +61,26 @@ export default function App() {
     })
   }
 
+  // handles the logout
+  const handleLogout = async () => {
+    await apiClient.logoutUser()
+    setUser({})
+    // setExercises([])
+    setError(null)
+  }
+
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar user={user} setUser={setUser} />
+        <Navbar user={user} setUser={setUser} handleLogout={handleLogout}/>
         <Routes>
           <Route
             path="/"
-            element={<Home user={user} error={error} posts={posts} addPost={addPost} isFetching={isFetching} />}
+            element={<Home user={user} error={error} exercises={exercises} addExercise={addExercise} isFetching={isFetching} />}
           />
           <Route path="/login" element={<Login user={user} setUser={setUser} />} />
           <Route path="/register" element={<Register user={user} setUser={setUser} />} />
-          <Route path="/posts/:postId" element={<PostDetail user={user} updatePost={updatePost} />} />
+          <Route path="/exercises/:postId" element={<PostDetail user={user} updatePost={updatePost} />} />
           <Route path="*" element={<NotFound user={user} error={error} />} />
         </Routes>
       </BrowserRouter>

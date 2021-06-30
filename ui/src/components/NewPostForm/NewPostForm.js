@@ -1,14 +1,17 @@
 import { useState } from "react"
-import axios from "axios"
+// import axios from "axios"
+import apiClient from "../services/apiClient"
 import NotAllowed from "../NotAllowed/NotAllowed"
 import "./NewPostForm.css"
 
-export default function NewPostForm({ user, addPost }) {
+export default function NewPostForm({ user, addExercise }) {
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState(null)
+  const [errors, setErrors] = useState(null)
   const [form, setForm] = useState({
-    caption: "",
-    imageUrl: "",
+    exerciseName: "",
+    category: "",
+    duration: "",
+    intensity: "",
   })
 
   const handleOnInputChange = (event) => {
@@ -19,21 +22,14 @@ export default function NewPostForm({ user, addPost }) {
     e.preventDefault()
     setIsLoading(true)
 
-    try {
-      const res = await axios.post(`http://localhost:3001/posts`, form)
-      if (res?.data?.post) {
-        addPost(res.data.post)
-        setForm({ caption: "", imageUrl: "" })
-      } else {
-        setError("Something went wrong with post creation.")
-      }
-    } catch (err) {
-      console.log(err)
-      const message = err?.response?.data?.error?.message
-      setError(message ?? String(err))
-    } finally {
-      setIsLoading(false)
-    }
+    const { errors } = await apiClient.createExercise({
+      exerciseName: form.exerciseName,
+      category: form.category,
+      duration: form.duration,
+      intensity: form.intensity,
+    });
+    if (errors) setErrors((e) => ({ ...e, form: errors }));
+    setIsLoading(false);
   }
 
   const renderForm = () => {
@@ -43,23 +39,48 @@ export default function NewPostForm({ user, addPost }) {
     return (
       <div className="form">
         <div className="input-field">
-          <label htmlFor="caption">Caption</label>
+          <label htmlFor="exerciseName">Name</label>
           <input
             type="text"
-            name="caption"
-            placeholder="A cool caption here"
-            value={form.caption}
+            name="exerciseName"
+            placeholder="Name of exercise"
+            value={form.exerciseName}
             onChange={handleOnInputChange}
           />
         </div>
 
         <div className="input-field">
-          <label htmlFor="imageUrl">Image URL</label>
+          <label htmlFor="category">Category</label>
           <input
             type="text"
-            name="imageUrl"
-            placeholder="The image URL for your workstation"
-            value={form.imageUrl}
+            name="category"
+            placeholder="Choose between resistance and cardio"
+            value={form.category}
+            onChange={handleOnInputChange}
+          />
+        </div>
+
+        <div className="input-field">
+          <label htmlFor="duration">Duration</label>
+          <input
+            type="number"
+            name="duration"
+            placeholder="Number of minutes"
+            min={1}
+            value={form.duration}
+            onChange={handleOnInputChange}
+          />
+        </div>
+
+        <div className="input-field">
+          <label htmlFor="intensity">Intensity</label>
+          <input
+            type="number"
+            min={1}
+            max={10}
+            name="intensity"
+            placeholder="Intensity from 1-10"
+            value={form.intensity}
             onChange={handleOnInputChange}
           />
         </div>
@@ -74,9 +95,9 @@ export default function NewPostForm({ user, addPost }) {
   return (
     <div className="NewPostForm">
       <div className="card">
-        <h2>Create a new post</h2>
+        <h2>Add an exercise</h2>
 
-        {Boolean(error) && <span className="error">{error}</span>}
+        {Boolean(errors) && <span className="errors">{errors}</span>}
 
         {renderForm()}
       </div>

@@ -4,10 +4,12 @@ class ApiClient {
   constructor(remoteHostUrl) {
     this.remoteHostUrl = remoteHostUrl;
     this.token = null;
+    this.tokenName = "life_tracker_token";
   }
 
   setToken(token) {
     this.token = token;
+    localStorage.setItem(this.tokenName, token);
   }
 
   async request({ endpoint, method = "GET", data = {} }) {
@@ -31,6 +33,28 @@ class ApiClient {
     }
   }
 
+  async listExercises() {
+    return await this.request({ endpoint: `exercise`, method: `GET` });
+  }
+
+  //helps with keeping the token persistent
+  async fetchUserFromToken() {
+    return await this.request({ endpoint: `auth/me`, method: `GET` });
+  }
+
+  //   async fetchExerciseById(postId) {
+  //       return await this.request({endpoint: `posts/${postId}`, method:`GET`})
+  //   }
+
+  async createExercise(info) {
+      return await this.request({
+          endpoint: `exercise/create`,
+          method: `POST`,
+          data: info
+      })
+  }
+
+
   async loginUser(credentials) {
     return await this.request({
       endpoint: `auth/login`,
@@ -45,6 +69,11 @@ class ApiClient {
       method: `POST`,
       data: credentials,
     });
+  }
+
+  async logoutUser() {
+    this.setToken(null);
+    localStorage.setItem(this.tokenName, "");
   }
 }
 
