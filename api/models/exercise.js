@@ -11,18 +11,47 @@ class Exercise {
     return result.rows;
   }
 
-  static async listUserExercises({ user }) {
-    // list all exercises in the DB in descending order. created at not working
-    // something about user not being able to be deconstructed. naybe need the security requireAuthenticatedUser
+  static async avgDuration({user}) {
     const result = await db.query(
       `
-      SELECT *
+      SELECT AVG(duration)
       FROM exercise
       WHERE user_id = $1
     `,
       [user.id]
     );
 
+    return result.rows[0];
+  }
+
+  static async totalDuration({user}) {
+    const result = await db.query(
+      `
+      SELECT SUM(duration)
+      FROM exercise
+      WHERE user_id = $1
+    `,
+      [user.id]
+    );
+
+    return result.rows[0];
+  }
+  
+
+
+  static async listUserExercises({ user }) {
+    // list all exercises in the DB in descending order. created at not working
+    // something about user not being able to be deconstructed. naybe need the security requireAuthenticatedUser
+    // console.log('im here', user)
+    const result = await db.query(
+      `
+      SELECT *
+      FROM exercise
+      WHERE user_id = $1
+      ORDER BY created_at
+    `,
+      [user.id]
+    );
     return result.rows;
   }
 
@@ -43,8 +72,8 @@ class Exercise {
     // console.log(user)
     const results = await db.query(
       ` 
-      INSERT INTO exercise (exerciseName, category, duration, intensity, user_id, created_at)
-      VALUES ($1, $2, $3, $4, $5, $6)
+      INSERT INTO exercise (exerciseName, category, duration, intensity, user_id)
+      VALUES ($1, $2, $3, $4, $5)
       RETURNING id,
                 category,
                 duration,
@@ -58,7 +87,6 @@ class Exercise {
         exercise.duration,
         exercise.intensity,
         user.id,
-        exercise.created_at,
       ]
     );
     // console.log(results)

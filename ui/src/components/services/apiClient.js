@@ -37,6 +37,22 @@ class ApiClient {
     return await this.request({ endpoint: `exercise`, method: `GET` });
   }
 
+  async listUserExercises(user) {
+    return await this.request({
+      endpoint: `exercise`,
+      method: `GET`,
+      data: user,
+    });
+  }
+
+  async activityExercises(user) {
+    return await this.request({
+      endpoint: `exercise/activity`,
+      method: `GET`,
+      data: user,
+    });
+  }
+
   //helps with keeping the token persistent
   async fetchUserFromToken() {
     return await this.request({ endpoint: `auth/me`, method: `GET` });
@@ -47,13 +63,12 @@ class ApiClient {
   //   }
 
   async createExercise(info) {
-      return await this.request({
-          endpoint: `exercise/create`,
-          method: `POST`,
-          data: info
-      })
+    return await this.request({
+      endpoint: `exercise/create`,
+      method: `POST`,
+      data: info,
+    });
   }
-
 
   async loginUser(credentials) {
     return await this.request({

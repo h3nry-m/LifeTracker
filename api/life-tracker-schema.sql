@@ -28,7 +28,7 @@ CREATE TABLE exercise (
     category        exerciseCategories,
     duration        INTEGER DEFAULT 1,
     intensity       INTEGER DEFAULT 1 CHECK (intensity <= 10),
-    created_at      TIMESTAMP DEFAULT NOW()
+    created_at      TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 --  many to many relationship 

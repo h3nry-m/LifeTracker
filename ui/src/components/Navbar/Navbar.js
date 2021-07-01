@@ -20,11 +20,14 @@ export default function Navbar({ user, setUser, handleLogout }) {
           <Facebook fill="var(--pure-white)" />
         </div> */}
 
-        <ul className="rightLinks">
           <div className="links">
             <li>
               <Link to="/">Home</Link>
+            </li>
+            <li>
               <Link to="/activity">Activity</Link>
+            </li>
+            <li>
               <Link to="/exercise">Exercise</Link>
             </li>
           </div>
@@ -34,7 +37,7 @@ export default function Navbar({ user, setUser, handleLogout }) {
             <>
               <li>
                 {/* <span>{user.email}</span> */}
-                <span onClick={handleLogout}>Logout</span>
+                <span className="test" onClick={handleLogout}>Logout</span>
               </li>
             </>
           ) : (
@@ -48,7 +51,7 @@ export default function Navbar({ user, setUser, handleLogout }) {
               </li>
             </>
           )}
-        </ul>
+        {/* </ul> */}
       </div>
     </nav>
   );

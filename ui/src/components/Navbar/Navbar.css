@@ -37,7 +37,7 @@
   margin-right: 50px;
 }
 
-.Navbar .content .rightLinks {
+.Navbar .content .links {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -49,10 +49,24 @@
   gap: 40px;
 }
 
-.Navbar .content .links li span {
+/* .Navbar .content .links li {
   display: flex;
-  flex-direction: row;
+  flex-direction: row; 
   width: 100px;
-  justify-content: space-between;
+  justify-content: space-around;
   color: white;
+ } */
+
+
+.Navbar .content .links li span{
+  color: white;
+} 
+
+
+.Navbar li {
+  display:flex;
+  /* flex-direction: space-around; */
+  list-style-type: none;
+  color: white;
+  padding: 5%
 }

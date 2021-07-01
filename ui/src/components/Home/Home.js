@@ -1,21 +1,15 @@
-import Post from "../Post/Post"
-import NewExerciseForm from "../NewExerciseForm/NewExerciseForm"
+
+import Hero from "../Hero/Hero"
+import About from "../About/About"
+
 import "./Home.css"
 
-export default function Home({ user, isFetching, exercises, addExercise, error }) {
+export default function Home() {
+
   return (
     <div className="Home">
-      <h1 className="intro">All Exercises</h1>
-
-      <NewExerciseForm user={user} addExercise={addExercise} />
-
-      <div className="feed">
-        {error ? <h2 className="error">{error}</h2> : null}
-        {isFetching ? <h2>Loading...</h2> : null}
-        {exercises?.map((post) => (
-          <Post post={post} key={post.id} user={user} />
-        ))}
-      </div>
+      <Hero />
+      <About />
     </div>
   )
 }

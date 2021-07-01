@@ -2,8 +2,6 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import axios from "axios"
 import apiClient from "../services/apiClient"
-import Stars from "../Stars/Stars"
-import StarsInput from "../StarsInput/StarsInput"
 import { formatRating, formatDate } from "../../utils/format"
 import "./PostDetail.css"
 
@@ -35,7 +33,7 @@ const fetchPostById = async ({ postId, setIsFetching, setError, setPost, setCapt
 export default function PostDetail({ user }) {
   const { postId } = useParams()
   const [post, setPost] = useState(null)
-  const [rating, setRating] = useState(null)
+  // const [rating, setRating] = useState(null)
   const [caption, setCaption] = useState("")
   const [isFetching, setIsFetching] = useState(false)
   const [isUpdating, setIsUpdating] = useState(false)
@@ -105,7 +103,7 @@ export default function PostDetail({ user }) {
           <div className="info">
             <p className="caption">{post.caption}</p>
             <span className="rating">
-              <Stars rating={post.rating || 0} max={10} />
+              {/* <Stars rating={post.rating || 0} max={10} /> */}
               {formatRating(post.rating || 0)}
             </span>
           </div>
@@ -131,7 +129,7 @@ export default function PostDetail({ user }) {
         ) : (
           <div className="rate-setup">
             <p>Rate this setup</p>
-            <StarsInput value={rating} setValue={setRating} max={10} />
+            {/* <StarsInput value={rating} setValue={setRating} max={10} /> */}
             <button className="btn" onClick={handleOnSaveRating} disabled={!userIsLoggedIn}>
               {isSavingRating ? "Loading..." : "Save Rating"}
             </button>

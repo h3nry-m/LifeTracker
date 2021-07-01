@@ -29,8 +29,13 @@ export default function NewExerciseForm({ user, addExercise }) {
       intensity: form.intensity,
     });
     if (errors) setErrors((e) => ({ ...e, form: errors }));
+    setForm({exerciseName: "",
+    category: "",
+    duration: "",
+    intensity: ""});
     setIsLoading(false);
   }
+
 
   const renderForm = () => {
     if (!user?.email) {
