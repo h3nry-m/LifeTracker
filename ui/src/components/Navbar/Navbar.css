@@ -43,7 +43,8 @@
   align-items: center;
   justify-content: flex-end;
   list-style-type: none;
-  margin-left: auto;
+  /* margin-left: auto; */
+  padding-left: 100px;
   flex: 1;
   max-width: 650px;
   gap: 40px;

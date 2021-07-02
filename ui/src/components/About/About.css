@@ -18,7 +18,8 @@
 
 .About .content img {
   height: 200px;
-  width: 240px;
+  width: 270px;
+  opacity: 0.9;
 }
 
 /* .About .content p {

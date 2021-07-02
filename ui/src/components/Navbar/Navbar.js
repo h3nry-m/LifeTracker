@@ -23,16 +23,23 @@ export default function Navbar({ user, setUser, handleLogout }) {
         </div> */}
 
           <div className="links">
-            <li>
+            {/* <li>
               <Link to="/">Home</Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/activity">Activity</Link>
             </li>
             <li>
               <Link to="/exercise">Exercise</Link>
             </li>
+            <li>
+              <Link to="/nutrition">Nutrition</Link>
+            </li>
+            <li>
+              <Link to="/sleep">Sleep</Link>
+            </li>
           </div>
+
 
           {user?.email ? (
             // if user is logged in
@@ -49,7 +56,7 @@ export default function Navbar({ user, setUser, handleLogout }) {
                 <Link to="/login">Login</Link>
               </li>
               <li>
-                <Link to="/register">Sign Up</Link>
+                <Link to="/register">Register</Link>
               </li>
             </>
           )}
