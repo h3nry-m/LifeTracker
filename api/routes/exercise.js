@@ -3,7 +3,7 @@ const Exercise = require("../models/exercise")
 const router = express.Router()
 const security = require("../middleware/security")
 
-router.get("/", async (req, res, next) => {
+router.get("/", security.requireAuthenticatedUser, async (req, res, next) => {
     try {
       const { user } = res.locals
       // const exercises = await Exercise.listAllExercises()
@@ -16,7 +16,7 @@ router.get("/", async (req, res, next) => {
 
 
 
-router.get("/activity", async (req,res, next) => {
+router.get("/activity", security.requireAuthenticatedUser, async (req,res, next) => {
   try {
     const {user} = res.locals
     const avgDuration = await Exercise.avgDuration({user})

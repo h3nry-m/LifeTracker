@@ -4,7 +4,7 @@ import apiClient from "../services/apiClient"
 import NotAllowed from "../NotAllowed/NotAllowed"
 import "./NewExerciseForm.css"
 
-export default function NewExerciseForm({ user, addExercise }) {
+export default function NewExerciseForm({ user, addExercise, exercises }) {
   const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors] = useState(null)
   const [form, setForm] = useState({
@@ -22,17 +22,21 @@ export default function NewExerciseForm({ user, addExercise }) {
     e.preventDefault()
     setIsLoading(true)
 
-    const { errors } = await apiClient.createExercise({
+    const { data, errors } = await apiClient.createExercise({
       exerciseName: form.exerciseName,
       category: form.category,
       duration: form.duration,
       intensity: form.intensity,
     });
+    // addExercise(form);
+    if (data) addExercise(form);
     if (errors) setErrors((e) => ({ ...e, form: errors }));
+
     setForm({exerciseName: "",
     category: "",
     duration: "",
     intensity: ""});
+
     setIsLoading(false);
   }
 

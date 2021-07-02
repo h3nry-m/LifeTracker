@@ -8,14 +8,21 @@ export default function About() {
         <h3>About</h3>
         <div className="summary">
           <div className="text">
-            <p>
-              The codepath student store offers great products at great prices from a great team and for a great cause.
+            <ol>
+              <li>Exercise controls weight</li>
+              <li>Exercise combats health conditions and diseases</li>  
+              <li>Exercise improves mood</li>
+              <li>Exercise boosts energy</li>
+              <li>Exercise promotes better sleep</li>
+
+            </ol>
+            {/* <p>
+              Exercise controls weight.
             </p>
             <p>
-              We've searched far and wide for items that perk the interests of even the most eccentric students and
-              decided to offer them all here in one place.
+              Exercise combats health conditions and diseases.
             </p>
-            <p>All proceeds go towards bringing high quality CS education to college students around the country.</p>
+            <p>Exercise improves mood.</p> */}
           </div>
           <div className="media">
             {/* <img src={giant_codepath} alt="codepath large" /> */}

@@ -2,7 +2,8 @@ import moment from "moment"
 
 export const formatDate = (date) => {
   const d = new Date(date)
-  return moment(d).format("MMM Do, YYYY")
+  // return moment(d).format("MMM Do, YYYY")
+  return moment(d).format("MMMM Do, YYYY, h:mm:ss a")
 }
 
 const formatter = new Intl.NumberFormat("en-US", {

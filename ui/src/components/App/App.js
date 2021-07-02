@@ -13,9 +13,9 @@ import Activity from "../Activity/Activity";
 import "./App.css";
 
 export default function App() {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
   const [exercises, setExercises] = useState([]);
-  const [summaryExercise, setSummaryExercise] = useState({});
+  // const [summaryExercise, setSummaryExercise] = useState({});
   const [error, setError] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
 
@@ -50,26 +50,13 @@ export default function App() {
       setIsFetching(false);
     };
 
-    // const activityExercises = async () => {
-    //   setIsFetching(true);
-
-    //   const { data, error } = await apiClient.activityExercises(user);
-    //   try {
-    //     data && setSummaryExercise({avgDuration:+data.avgDuration.avg, totalDuration: +data.totalDuration.sum});
-    //   } catch (error) {
-    //     setError(error)
-    //   }
-    //   setIsFetching(false);
-    // };
-
     fetchExercises();
-    // activityExercises();
   }, [user]);
 
-  console.log(summaryExercise)
+  // console.log(summaryExercise)
 
   const addExercise = (newExercises) => {
-    setExercises((oldExercises) => [newExercises, ...oldExercises]);
+    setExercises((oldExercises) => [...oldExercises, newExercises]);
   };
 
   // const updatePost = ({ postId, postUpdate }) => {
@@ -87,7 +74,7 @@ export default function App() {
   // handles the logout
   const handleLogout = async () => {
     await apiClient.logoutUser();
-    setUser({});
+    setUser(null);
     // setExercises([])
     setError(null);
   };
@@ -101,12 +88,7 @@ export default function App() {
         <Navbar user={user} setUser={setUser} handleLogout={handleLogout} />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/activity"
-            element={
-              <Activity user={user} setError={setError} summaryExercise={summaryExercise} error={error} />
-            }
-          />
+          <Route path="/activity" element={<Activity user={user} />} />
           <Route
             path="/exercise"
             element={
@@ -115,12 +97,13 @@ export default function App() {
                 error={error}
                 exercises={exercises}
                 isFetching={isFetching}
+                addExercise={addExercise}
               />
             }
           />
           <Route
             path="/exercise/create"
-            element={<NewExerciseForm user={user} addExercise={addExercise} />}
+            element={<NewExerciseForm user={user} addExercise={addExercise} exercises={exercises}/>}
           />
           <Route
             path="/login"
