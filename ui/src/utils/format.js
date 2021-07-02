@@ -7,8 +7,8 @@ export const formatDate = (date) => {
 }
 
 const formatter = new Intl.NumberFormat("en-US", {
-  minimumFractionDigits: 1,
-  maximumFractionDigits: 1,
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 0,
 })
 
 export const formatRating = (rating) => {

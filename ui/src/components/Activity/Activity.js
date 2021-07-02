@@ -2,6 +2,7 @@ import "./Activity.css";
 import apiClient from "../services/apiClient";
 import { useState, useEffect } from "react";
 import NotAllowed from "../NotAllowed/NotAllowed";
+import { formatRating } from "../../utils/format"
 
 export default function Activity({ user }) {
   const [summaryExercise, setSummaryExercise] = useState({});
@@ -32,7 +33,7 @@ export default function Activity({ user }) {
       <span>{user.first_name}'s Activity</span>
 
       <div className="feed">
-        <span>Average duration: {summaryExercise.avgDuration} minutes</span>
+        <span>Average duration: {formatRating(summaryExercise.avgDuration)} minutes</span>
         <span>Total duration: {summaryExercise.totalDuration} minutes</span>
       </div>
     </div>
