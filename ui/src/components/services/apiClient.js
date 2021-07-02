@@ -33,10 +33,7 @@ class ApiClient {
     }
   }
 
-  async listExercises() {
-    return await this.request({ endpoint: `exercise`, method: `GET` });
-  }
-
+  //EXERCISE STUFF-----------------------------------
   async listUserExercises(user) {
     return await this.request({
       endpoint: `exercise`,
@@ -53,21 +50,43 @@ class ApiClient {
     });
   }
 
-  //helps with keeping the token persistent
-  async fetchUserFromToken() {
-    return await this.request({ endpoint: `auth/me`, method: `GET` });
-  }
-
-  //   async fetchExerciseById(postId) {
-  //       return await this.request({endpoint: `posts/${postId}`, method:`GET`})
-  //   }
-
   async createExercise(info) {
     return await this.request({
       endpoint: `exercise/create`,
       method: `POST`,
       data: info,
     });
+  }
+
+  //FOOD STUFF-----------------------------------
+  async listUserFood(user) {
+    return await this.request({
+      endpoint: `food`,
+      method: `GET`,
+      data: user,
+    });
+  }
+
+  async activityFood(user) {
+    return await this.request({
+      endpoint: `food/activity`,
+      method: `GET`,
+      data: user,
+    });
+  }
+
+  async createFood(info) {
+    return await this.request({
+      endpoint: `food/create`,
+      method: `POST`,
+      data: info,
+    });
+  }
+
+  // LOGIN STUFF-----------------------------------
+  //helps with keeping the token persistent
+  async fetchUserFromToken() {
+    return await this.request({ endpoint: `auth/me`, method: `GET` });
   }
 
   async loginUser(credentials) {

@@ -20,6 +20,9 @@
   height: 200px;
   width: 270px;
   opacity: 0.9;
+  border-style: solid;
+  border-width: thin;
+  border-color: black;
 }
 
 /* .About .content p {

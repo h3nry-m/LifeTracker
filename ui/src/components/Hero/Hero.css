@@ -47,4 +47,6 @@
   .Hero .content .media img {
     height: 340px;
     width: 400px;
+    border-style:solid;
+    border-width: thin;
   }

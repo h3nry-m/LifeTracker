@@ -15,16 +15,19 @@ CREATE TABLE food (
     id          SERIAL PRIMARY KEY, 
     foodName    TEXT NOT NULL, 
     category    foodCategories,
+    user_id     INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE, 
     quantity    INTEGER DEFAULT 1,
     calories    INTEGER,
-    imageUrl    TEXT
+    imageUrl    TEXT,
+    created_at  TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE exercise (
     id              SERIAL PRIMARY KEY,
     user_id         INTEGER NOT NULL,
     FOREIGN KEY     (user_id) REFERENCES users(id) ON DELETE CASCADE, 
-    exerciseName    TEXT UNIQUE NOT NULL,
+    exerciseName    TEXT NOT NULL,
     category        exerciseCategories,
     duration        INTEGER DEFAULT 1,
     intensity       INTEGER DEFAULT 1 CHECK (intensity <= 10),

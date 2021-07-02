@@ -5,6 +5,7 @@ const { PORT } = require("./config")
 const { BadRequestError, NotFoundError } = require("./utils/errors")
 const authRoutes = require("./routes/auth")
 const exerciseRoutes = require("./routes/exercise")
+const foodRoutes = require("./routes/food")
 
 const app = express()
 const security = require("./middleware/security")
@@ -20,6 +21,7 @@ app.use(security.extractUserFromJwt)
 
 app.use("/auth", authRoutes)
 app.use("/exercise", exerciseRoutes)
+app.use("/food", foodRoutes)
 
 // if endpoint doesn't exist then will send to NotFoundError. Handles 404 errors
 // basically it tries going through /auth and then /exercise. if None of those work

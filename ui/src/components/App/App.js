@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import apiClient from "../services/apiClient";
 import Navbar from "../Navbar/Navbar";
 import Home from "../Home/Home";
@@ -9,19 +9,19 @@ import Login from "../Login/Login";
 import NotFound from "../NotFound/NotFound";
 import Exercise from "../Exercise/Exercise";
 import NewExerciseForm from "../NewExerciseForm/NewExerciseForm";
+import NewFoodForm from "../NewFoodForm/NewFoodForm";
 import Activity from "../Activity/Activity";
+import Food from "../Food/Food";
 import "./App.css";
 
 export default function App() {
   const [user, setUser] = useState(null);
   const [exercises, setExercises] = useState([]);
-  // const [summaryExercise, setSummaryExercise] = useState({});
+  const [foods, setFoods] = useState([]);
   const [error, setError] = useState(null);
   const [isFetching, setIsFetching] = useState(false);
 
-  // can add exercises correctly
-  // now want to display all exercises
-  // then move it so that they live in different links
+
 
   // handles the persistent user token
   useEffect(() => {
@@ -50,26 +50,44 @@ export default function App() {
       setIsFetching(false);
     };
 
+    // const fetchFood = async () => {
+    //   setIsFetching(true);
+
+    //   const { data, error } = await apiClient.listUserFood(user);
+    //   if (data) setFoods(data.foods);
+    //   if (error) setError(error);
+
+    //   setIsFetching(false);
+    // };
+
     fetchExercises();
+    // fetchFood();
   }, [user]);
 
-  // console.log(summaryExercise)
+
+  useEffect(() => {
+    const fetchFood = async () => {
+      setIsFetching(true);
+
+      const { data, error } = await apiClient.listUserFood(user);
+      if (data) setFoods(data.foods);
+      if (error) setError(error);
+
+      setIsFetching(false);
+    };
+
+    fetchFood();
+  }, [user]);
+
+
 
   const addExercise = (newExercises) => {
     setExercises((oldExercises) => [...oldExercises, newExercises]);
   };
 
-  // const updatePost = ({ postId, postUpdate }) => {
-  //   setExercises((oldExercises) => {
-  //     return oldExercises.map((post) => {
-  //       if (post.id === Number(postId)) {
-  //         return { ...post, ...postUpdate }
-  //       }
-
-  //       return post
-  //     })
-  //   })
-  // }
+  // const addFood = (newFood) => {
+  //   setFoods((oldFood) => [...oldFood, newFood]);
+  // };
 
   // handles the logout
   const handleLogout = async () => {
@@ -79,12 +97,9 @@ export default function App() {
     setError(null);
   };
 
-
-//   <Route exact path="/">
-//   {loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />}
-// </Route>
-
-
+  //   <Route exact path="/">
+  //   {loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />}
+  // </Route>
 
   return (
     <div className="App">
@@ -93,6 +108,18 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/activity" element={<Activity user={user} />} />
+          <Route
+            path="/nutrition"
+            element={
+              <Food
+                user={user}
+                error={error}
+                foods={foods}
+                isFetching={isFetching}
+                // addFood={addFood}
+              />
+            }
+          />
           <Route
             path="/exercise"
             element={
@@ -107,7 +134,22 @@ export default function App() {
           />
           <Route
             path="/exercise/create"
-            element={<NewExerciseForm user={user} addExercise={addExercise} exercises={exercises}/>}
+            element={
+              <NewExerciseForm
+                user={user}
+                addExercise={addExercise}
+                exercises={exercises}
+              />
+            }
+          />
+          <Route
+            path="/nutrition/create"
+            element={
+              <NewFoodForm 
+              user={user} 
+              // addFood={addFood} 
+              foods={foods} />
+            }
           />
           <Route
             path="/login"

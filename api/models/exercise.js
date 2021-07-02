@@ -48,12 +48,13 @@ class Exercise {
       SELECT *
       FROM exercise
       WHERE user_id = $1
-      ORDER BY created_at
+      ORDER BY created_at DESC
     `,
       [user.id]
     );
     return result.rows;
   }
+
 
   static async createNewExercise({ exercise, user }) {
     const requiredFields = [

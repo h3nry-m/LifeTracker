@@ -1,17 +1,17 @@
 import { useState } from "react";
 import apiClient from "../services/apiClient";
 import NotAllowed from "../NotAllowed/NotAllowed";
-import "./NewExerciseForm.css";
+import "./NewFoodForm.css";
 
 
-export default function NewExerciseForm({ user, addExercise, exercises }) {
+export default function NewFoodForm({ user, addFood, foods }) {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState(null);
   const [form, setForm] = useState({
-    exerciseName: "",
+    foodName: "",
     category: "",
-    duration: "",
-    intensity: "",
+    quantity: "",
+    calories: "",
   });
 
   const handleOnInputChange = (event) => {
@@ -23,20 +23,20 @@ export default function NewExerciseForm({ user, addExercise, exercises }) {
     e.preventDefault();
     setIsLoading(true);
 
-    const { data, errors } = await apiClient.createExercise({
-      exerciseName: form.exerciseName,
+    const { data, errors } = await apiClient.createFood({
+      foodName: form.foodName,
       category: form.category,
-      duration: form.duration,
-      intensity: form.intensity,
+      quantity: form.quantity,
+      calories: form.calories,
     });
-    
-    if (data) addExercise(form);
+    // addExercise(form);
+    if (data) addFood(form);
     if (errors) setErrors((e) => ({ ...e, form: errors }));
 
-    setForm({ exerciseName: "", category: "", duration: "", intensity: "" });
+    setForm({ foodName: "", category: "", quantity: "", calories: "" });
 
     setIsLoading(false);
-    // <Redirect to="/" />
+    
   };
 
   const renderForm = () => {
@@ -46,14 +46,37 @@ export default function NewExerciseForm({ user, addExercise, exercises }) {
     return (
       <div className="form">
         <div className="input-field">
-          <label htmlFor="exerciseName">Name</label>
+          <label htmlFor="foodName">Name</label>
           <input
             type="text"
-            name="exerciseName"
-            // placeholder="Name of exercise"
-            value={form.exerciseName}
+            name="foodName"
+            // placeholder="Name of food"
+            value={form.foodName}
             onChange={handleOnInputChange}
           />
+        </div>
+
+        {/* <div className="input-field">
+          <label htmlFor="category">Category</label>
+          <input
+            type="text"
+            name="category"
+            placeholder="Choose between resistance and Fruit"
+            value={form.category}
+            onChange={handleOnInputChange}
+          />
+        </div> */}
+
+        <div className="radio">
+          {/* <label htmlFor="category">Category</label> */}
+          <input
+            type="radio"
+            name="category"
+            value="Fruit"
+            checked={form.category === "Fruit"}
+            onChange={handleOnInputChange}
+          />
+          Fruit
         </div>
 
         <div className="radio">
@@ -61,46 +84,32 @@ export default function NewExerciseForm({ user, addExercise, exercises }) {
           <input
             type="radio"
             name="category"
-            value="Cardio"
-            checked={form.category === "Cardio"}
+            value="Vegetable"
+            checked={form.category === "Vegetable"}
             onChange={handleOnInputChange}
           />
-          Cardio
-        </div>
-
-        <div className="radio">
-          {/* <label htmlFor="category">Category</label> */}
-          <input
-            type="radio"
-            name="category"
-            value="Resistance"
-            checked={form.category === "Resistance"}
-            onChange={handleOnInputChange}
-          />
-          Resistance
+          Vegetable
         </div>
 
         <div className="input-field">
-          <label htmlFor="duration">Duration</label>
+          <label htmlFor="quantity">Quantity</label>
           <input
             type="number"
-            name="duration"
-            placeholder="Number of minutes"
+            name="quantity"
+            // placeholder="Number of minutes"
             min={1}
-            value={form.duration}
+            value={form.quantity}
             onChange={handleOnInputChange}
           />
         </div>
 
         <div className="input-field">
-          <label htmlFor="intensity">Intensity</label>
+          <label htmlFor="calories">Calories</label>
           <input
             type="number"
-            min={1}
-            max={10}
-            name="intensity"
-            placeholder="Intensity from 1-10"
-            value={form.intensity}
+            name="calories"
+            // placeholder="Intensity from 1-10"
+            value={form.calories}
             onChange={handleOnInputChange}
           />
         </div>
@@ -112,9 +121,9 @@ export default function NewExerciseForm({ user, addExercise, exercises }) {
   };
 
   return (
-    <div className="NewExerciseForm">
+    <div className="NewFoodForm">
       <div className="card">
-        <h2>Add an exercise</h2>
+        <h2>Add a food item</h2>
 
         {Boolean(errors) && <span className="errors">{errors}</span>}
 
