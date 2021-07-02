@@ -1,4 +1,4 @@
-// import phone from "../../assets/phone.svg"
+import tracking from "../../assets/tracking4.jpg"
 import "./Hero.css"
 
 export default function Hero() {
@@ -6,17 +6,16 @@ export default function Hero() {
     <div className="Hero">
       <div className="content">
         <div className="intro">
-          <h1>Welcome!</h1>
-          <h1>Life Tracker!</h1>
+          {/* <h1>Welcome!</h1> */}
+          <h1>Life Trace</h1>
           <p>
-            We have all kinds of goodies. Click on any of the items to start filling up your shopping cart. Checkout
-            whenever you're ready.
+            Make your mark today
           </p>
         </div>
 
-        {/* <div className="media">
-          <img src={phone} alt="hero" />
-        </div> */}
+        <div className="media">
+          <img src={tracking} alt="tracking" />
+        </div>
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route} from "react-router-dom";
 import apiClient from "../services/apiClient";
 import Navbar from "../Navbar/Navbar";
 import Home from "../Home/Home";
@@ -79,8 +79,12 @@ export default function App() {
     setError(null);
   };
 
-  // need to make a home one then move the hero and about to only home so that
-  //it doesn't show up every page
+
+//   <Route exact path="/">
+//   {loggedIn ? <Redirect to="/dashboard" /> : <PublicHomePage />}
+// </Route>
+
+
 
   return (
     <div className="App">

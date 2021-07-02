@@ -1,12 +1,29 @@
-// import giant_codepath from "../../assets/giant_codepath.svg"
+import hero from "../../assets/hero.jpg"
 import "./About.css"
+import { Link } from "react-router-dom"
+import sleep from "../../assets/sleep.jpg"
+import nutrition from "../../assets/nutrition.jpg"
 
 export default function About() {
+
   return (
     <div className="About" id="About">
       <div className="content">
-        <h3>About</h3>
-        <div className="summary">
+        <div className="exercise">
+        <Link to="/exercise">
+              <img src={hero} alt="hero" />
+            </Link>
+            <p>Exercise</p>
+          </div>
+        <div className="nutrition">
+        <img src={nutrition} alt="hero" />
+          <p>Nutrition</p>
+        </div>
+
+        <div className="sleep">
+        <img src={sleep} alt="hero" />
+          <p>Sleep</p>
+        {/* <div className="summary">
           <div className="text">
             <ol>
               <li>Exercise controls weight</li>
@@ -14,8 +31,7 @@ export default function About() {
               <li>Exercise improves mood</li>
               <li>Exercise boosts energy</li>
               <li>Exercise promotes better sleep</li>
-
-            </ol>
+            </ol> */}
             {/* <p>
               Exercise controls weight.
             </p>
@@ -23,12 +39,19 @@ export default function About() {
               Exercise combats health conditions and diseases.
             </p>
             <p>Exercise improves mood.</p> */}
-          </div>
-          <div className="media">
-            {/* <img src={giant_codepath} alt="codepath large" /> */}
-          </div>
+          {/* </div> */}
+          {/* <div className="media">
+            <Link to="/exercise">
+              <img src={hero} alt="hero" />
+            </Link>
+          </div> */}
+
+        {/* <div className="test">
+          <p>test</p>
+          <p>test2</p>
+        </div> */}
         </div>
       </div>
-    </div>
+    // </div>
   )
 }

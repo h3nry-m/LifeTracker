@@ -1,5 +1,3 @@
-import Post from "../Post/Post";
-import { Link } from "react-router-dom";
 import "./Activity.css";
 import apiClient from "../services/apiClient";
 import { useState, useEffect } from "react";
@@ -30,7 +28,7 @@ export default function Activity({ user }) {
   }
   return (
     <div className="Activity">
-      <h1 className="intro">All Activities</h1>
+      <h8 className="intro">Activities</h8>
       <span>{user.first_name}'s Activity</span>
 
       <div className="feed">

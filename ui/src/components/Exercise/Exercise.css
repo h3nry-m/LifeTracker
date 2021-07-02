@@ -16,7 +16,8 @@
 
   .Exercise a {
     display: flex;
-    justify-content: flex-end;
+    align-items: flex-end;
+    /* background: var(--dark-blue); */
     padding-bottom: 5%;
   }
   .Exercise .intro {

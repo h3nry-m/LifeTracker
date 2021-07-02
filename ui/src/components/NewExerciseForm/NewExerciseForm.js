@@ -1,9 +1,8 @@
 import { useState } from "react";
-// import axios from "axios"
 import apiClient from "../services/apiClient";
 import NotAllowed from "../NotAllowed/NotAllowed";
 import "./NewExerciseForm.css";
-import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 export default function NewExerciseForm({ user, addExercise, exercises }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -40,6 +39,7 @@ export default function NewExerciseForm({ user, addExercise, exercises }) {
     setForm({ exerciseName: "", category: "", duration: "", intensity: "" });
 
     setIsLoading(false);
+    // <Redirect to="/" />
   };
 
   const renderForm = () => {

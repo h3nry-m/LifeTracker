@@ -1,6 +1,5 @@
 import Post from "../Post/Post"
 import { Link } from "react-router-dom";
-import NewExerciseForm from "../NewExerciseForm/NewExerciseForm"
 import "./Exercise.css"
 import NotAllowed from "../NotAllowed/NotAllowed";
 export default function Exercise({ user, isFetching, exercises, error }) {
@@ -9,9 +8,8 @@ export default function Exercise({ user, isFetching, exercises, error }) {
   }
   return (
     <div className="Exercise">
-      <h1 className="intro">{user.username}'s Exercises</h1>
+      <h8 className="intro">Exercises</h8>
 
-      {/* <NewExerciseForm user={user} addExercise={addExercise} /> */}
       <Link to="create">
         <button>Add New Exercise</button>
         </Link>

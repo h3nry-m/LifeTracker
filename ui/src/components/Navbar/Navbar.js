@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 // import Instagram from "../Icons/Instagram";
 // import Facebook from "../Icons/Facebook";
 import "./Navbar.css";
+import white from "../../assets/white.svg"
 
 export default function Navbar({ user, setUser, handleLogout }) {
   return (
@@ -11,6 +12,7 @@ export default function Navbar({ user, setUser, handleLogout }) {
         <div className="logo">
           <Link to="/">
             <h1>Life Tracker</h1>
+            <img src={white} alt="logo" />
           </Link>
         </div>
 
