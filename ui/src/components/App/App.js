@@ -65,19 +65,20 @@ export default function App() {
   }, [user]);
 
 
-  useEffect(() => {
-    const fetchFood = async () => {
-      setIsFetching(true);
+  // useEffect(() => {
+  //   const fetchFood = async () => {
+  //     setIsFetching(true);
 
-      const { data, error } = await apiClient.listUserFood(user);
-      if (data) setFoods(data.foods);
-      if (error) setError(error);
+  //     const { data, error } = await apiClient.listUserFood(user);
+  //     if (data) setFoods(data.foods);
+  //     if (error) setError(error);
 
-      setIsFetching(false);
-    };
+  //     setIsFetching(false);
+  //   };
 
-    fetchFood();
-  }, [user]);
+  //   fetchFood();
+  // }, [user]);
+
 
 
 
@@ -85,9 +86,9 @@ export default function App() {
     setExercises((oldExercises) => [...oldExercises, newExercises]);
   };
 
-  // const addFood = (newFood) => {
-  //   setFoods((oldFood) => [...oldFood, newFood]);
-  // };
+  const addFood = (newFood) => {
+    setFoods((oldFood) => [...oldFood, newFood]);
+  };
 
   // handles the logout
   const handleLogout = async () => {
@@ -116,7 +117,7 @@ export default function App() {
                 error={error}
                 foods={foods}
                 isFetching={isFetching}
-                // addFood={addFood}
+                addFood={addFood}
               />
             }
           />
@@ -145,10 +146,7 @@ export default function App() {
           <Route
             path="/nutrition/create"
             element={
-              <NewFoodForm 
-              user={user} 
-              // addFood={addFood} 
-              foods={foods} />
+              <NewFoodForm user={user} addFood={addFood} foods={foods} />
             }
           />
           <Route
