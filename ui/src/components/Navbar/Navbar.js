@@ -16,11 +16,6 @@ export default function Navbar({ user, setUser, handleLogout }) {
           </Link>
         </div>
 
-        {/* <div className="socials">
-          <Twitter fill="var(--pure-white)" />
-          <Instagram fill="var(--pure-white)" />
-          <Facebook fill="var(--pure-white)" />
-        </div> */}
 
           <div className="links">
             {/* <li>

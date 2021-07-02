@@ -20,7 +20,7 @@ router.get("/activity", security.requireAuthenticatedUser, async (req,res, next)
   try {
     const {user} = res.locals
     const avgDuration = await Exercise.avgDuration({user})
-    console.log('avg duration', avgDuration)
+    // console.log('avg duration', avgDuration)
     const totalDuration = await Exercise.totalDuration({user})
     return res.status(200).json({ avgDuration, totalDuration})
   } catch (err) {

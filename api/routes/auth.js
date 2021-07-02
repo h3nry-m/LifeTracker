@@ -16,7 +16,7 @@ router.get("/me", security.requireAuthenticatedUser, async (req, res, next) => {
     // console.log("user is", user)
     const publicUser = await User.makePublicUser(user)
     // const orders = await Order.listOrdersForUser(user)
-    console.log(publicUser)
+    // console.log(publicUser)
     return res.status(200).json({ user: publicUser })
   } catch (err) {
     next(err)
