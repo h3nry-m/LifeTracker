@@ -1,9 +1,13 @@
 .NotAllowed {
+  width: 100%;
+  max-width: 100vw;
+  height: 100%;
+  max-height: calc(100vh - var(--navbar-height));
+  min-height: calc(100vh - var(--navbar-height));
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 20px;
 }
 
 .NotAllowed h2 {
@@ -17,6 +21,6 @@
   gap: 5px;
   border: solid 1px var(--dark-blue);
   padding: 5px 10px;
-  margin-top: 10px;
+  margin-top: 30px;
   color: var(--muted);
 }
