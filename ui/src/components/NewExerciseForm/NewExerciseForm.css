@@ -9,6 +9,7 @@
   max-width: 100vw;
   padding: 20px 30px;
   margin-bottom: 40px;
+  margin-top: 50px;
 }
 .NewExerciseForm .card {
   background: var(--pure-white);
@@ -57,4 +58,11 @@
   border: none;
   cursor: pointer;
   margin-top: 15px;
+}
+
+
+.NewExerciseForm .card .form .radio {
+  display: flex;
+  flex-direction: row;
+  padding: 1%
 }

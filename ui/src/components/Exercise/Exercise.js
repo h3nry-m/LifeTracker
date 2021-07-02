@@ -9,7 +9,7 @@ export default function Exercise({ user, isFetching, exercises, error }) {
   }
   return (
     <div className="Exercise">
-      <h1 className="intro">All Exercises</h1>
+      <h1 className="intro">{user.username}'s Exercises</h1>
 
       {/* <NewExerciseForm user={user} addExercise={addExercise} /> */}
       <Link to="create">

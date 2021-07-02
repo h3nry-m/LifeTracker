@@ -1,26 +1,31 @@
-import { useState } from "react"
+import { useState } from "react";
 // import axios from "axios"
-import apiClient from "../services/apiClient"
-import NotAllowed from "../NotAllowed/NotAllowed"
-import "./NewExerciseForm.css"
+import apiClient from "../services/apiClient";
+import NotAllowed from "../NotAllowed/NotAllowed";
+import "./NewExerciseForm.css";
+import { Link } from "react-router-dom";
 
 export default function NewExerciseForm({ user, addExercise, exercises }) {
-  const [isLoading, setIsLoading] = useState(false)
-  const [errors, setErrors] = useState(null)
+  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState(null);
   const [form, setForm] = useState({
     exerciseName: "",
     category: "",
     duration: "",
     intensity: "",
-  })
+  });
 
   const handleOnInputChange = (event) => {
-    setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
-  }
+    setForm((f) => ({ ...f, [event.target.name]: event.target.value }));
+  };
+
+  // const onRadioChange = (event) => {
+  //   setForm((f) => ({ ...f, [event.target.name]: event.target.value }))
+  // }
 
   const handleOnSubmit = async (e) => {
-    e.preventDefault()
-    setIsLoading(true)
+    e.preventDefault();
+    setIsLoading(true);
 
     const { data, errors } = await apiClient.createExercise({
       exerciseName: form.exerciseName,
@@ -32,18 +37,14 @@ export default function NewExerciseForm({ user, addExercise, exercises }) {
     if (data) addExercise(form);
     if (errors) setErrors((e) => ({ ...e, form: errors }));
 
-    setForm({exerciseName: "",
-    category: "",
-    duration: "",
-    intensity: ""});
+    setForm({ exerciseName: "", category: "", duration: "", intensity: "" });
 
     setIsLoading(false);
-  }
-
+  };
 
   const renderForm = () => {
     if (!user?.email) {
-      return <NotAllowed />
+      return <NotAllowed />;
     }
     return (
       <div className="form">
@@ -58,7 +59,7 @@ export default function NewExerciseForm({ user, addExercise, exercises }) {
           />
         </div>
 
-        <div className="input-field">
+        {/* <div className="input-field">
           <label htmlFor="category">Category</label>
           <input
             type="text"
@@ -67,6 +68,30 @@ export default function NewExerciseForm({ user, addExercise, exercises }) {
             value={form.category}
             onChange={handleOnInputChange}
           />
+        </div> */}
+
+        <div className="radio">
+          {/* <label htmlFor="category">Category</label> */}
+          <input
+            type="radio"
+            name="category"
+            value="Cardio"
+            checked={form.category === "Cardio"}
+            onChange={handleOnInputChange}
+          />
+          Cardio
+        </div>
+
+        <div className="radio">
+          {/* <label htmlFor="category">Category</label> */}
+          <input
+            type="radio"
+            name="category"
+            value="Resistance"
+            checked={form.category === "Resistance"}
+            onChange={handleOnInputChange}
+          />
+          Resistance
         </div>
 
         <div className="input-field">
@@ -93,13 +118,12 @@ export default function NewExerciseForm({ user, addExercise, exercises }) {
             onChange={handleOnInputChange}
           />
         </div>
-
         <button className="btn" disabled={isLoading} onClick={handleOnSubmit}>
           {isLoading ? "Loading..." : "Submit"}
         </button>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div className="NewExerciseForm">
@@ -111,5 +135,5 @@ export default function NewExerciseForm({ user, addExercise, exercises }) {
         {renderForm()}
       </div>
     </div>
-  )
+  );
 }

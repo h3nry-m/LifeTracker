@@ -6,10 +6,18 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex-wrap: wrap;
   }
   
   .Exercise .intro {
     margin: 40px 0;
+  }
+
+
+  .Exercise a {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 5%;
   }
   .Exercise .intro {
     font-size: 80px;

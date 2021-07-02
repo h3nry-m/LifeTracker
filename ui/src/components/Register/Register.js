@@ -10,7 +10,7 @@ export default function Register({ user, setUser }) {
   const [form, setForm] = useState({
     email: "",
     password: "",
-    passwordConfirm: "",
+    // passwordConfirm: "",
     username: "",
     firstname: "",
     lastname: "",
@@ -51,13 +51,13 @@ export default function Register({ user, setUser }) {
     setIsProcessing(true);
     setErrors((e) => ({ ...e, form: null }));
 
-    if (form.passwordConfirm !== form.password) {
-      setErrors((e) => ({ ...e, passwordConfirm: "Passwords do not match." }));
-      setIsProcessing(false);
-      return;
-    } else {
-      setErrors((e) => ({ ...e, passwordConfirm: null }));
-    }
+    // if (form.passwordConfirm !== form.password) {
+    //   setErrors((e) => ({ ...e, passwordConfirm: "Passwords do not match." }));
+    //   setIsProcessing(false);
+    //   return;
+    // } else {
+    //   setErrors((e) => ({ ...e, passwordConfirm: null }));
+    // }
 
     const { data, error } = await apiClient.signupUser({
       email: form.email,
@@ -169,7 +169,7 @@ export default function Register({ user, setUser }) {
             )}
           </div>
 
-          <div className="input-field">
+          {/* <div className="input-field">
             <label htmlFor="passwordConfirm">Confirm Password</label>
             <input
               type="password"
@@ -181,7 +181,7 @@ export default function Register({ user, setUser }) {
             {errors.passwordConfirm && (
               <span className="error">{errors.passwordConfirm}</span>
             )}
-          </div>
+          </div> */}
 
           <button
             className="btn"
